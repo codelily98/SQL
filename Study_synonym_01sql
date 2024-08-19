@@ -1,0 +1,34 @@
+--hr
+grant all on employees to c##java;
+
+--c##java
+create synonym hr_emp for hr.employees;
+--ORA-01031: 권한이 불충분합니다
+--01031. 00000 -  "insufficient privileges"
+--*Cause:    
+--An attempt was made to perform a database operation without
+--the necessary privileges.
+--*Action:   
+--Ask your database administrator or designated security
+--administrator to grant you the necessary privileges
+
+--system
+grant create synonym to c##java;
+
+--c##java
+create synonym hr_emp for hr.employees;
+select * from user_synonyms;
+select * from hr.employees;
+
+drop synonym hr_emp;
+commit;
+
+--[문제] C##JAVA 계정에서 HR 계정의 DEPARTMENTS 
+--테이블의 시노님(HR_DEP)을 생성하시오
+--hr
+grant all on departments to c##java;
+
+--c##java
+create synonym hr_dep for hr.departments;
+select * from user_synonyms;
+select * from hr.departments;
